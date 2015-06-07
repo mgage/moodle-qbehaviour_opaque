@@ -59,7 +59,7 @@ class qbehaviour_opaque_connection extends qtype_opaque_connection {
     public function start($remoteid, $remoteversion, $data, $cachedresources, $options = null) {
 
         $initialparams = array(
-            'randomseed' => $data['-_attempt'],
+            'randomseed' => $data['-_randomseed'],
             'userid' => $data['-_userid'],
             'language' => $data['-_language'],
             'passKey' => $this->generate_passkey($data['-_userid']),
