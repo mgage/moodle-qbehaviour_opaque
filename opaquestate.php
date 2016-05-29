@@ -68,7 +68,8 @@ class qbehaviour_opaque_state {
      */
     public function __construct(question_attempt $qa, question_attempt_step $pendingstep = null,
             question_display_options $options = null) {
-
+        ###echo "<br/> opaquestate_construct: pending step is ".print_r($pendingstep, true);
+        ###echo "<br/> option readonly =",print_r($options->readonly, true);
         $firststep = $this->find_step(0, $qa, $pendingstep);
         if (is_null($firststep) || !$firststep->has_behaviour_var('_randomseed')) {
             throw new coding_exception(
@@ -101,6 +102,7 @@ class qbehaviour_opaque_state {
         }
 
         try {
+            ###echo "<br/> opaquestate.php: updating with options readonly = ".print_r($options->readonly,true);
             $this->update($qa, $pendingstep, $targetseq, $options);
         } catch (SoapFault $sf) {
             $this->invalidate();
@@ -222,7 +224,8 @@ class qbehaviour_opaque_state {
      */
     public function process_next_step($step) {
         $resourcecache = $this->get_resource_cache();
-
+        # this is where the engine is called. 
+        ###echo "<br/> function update: inside process_next_step: ".get_class($step);
         $processreturn = $this->get_connection()->process(
                 $this->state->questionsessionid, self::submitted_data($step));
 

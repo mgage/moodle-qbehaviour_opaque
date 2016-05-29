@@ -42,11 +42,12 @@ class qbehaviour_opaque_renderer extends qbehaviour_renderer {
         }
 
         try {
+            # this is where the opaque server is called to get html of problem
             $opaquestate = new qbehaviour_opaque_state($qa, null, $options);
         } catch (SoapFault $sf) {
             return $this->soap_fault($sf);
         }
-
+        ####echo "<br/>opaque/renderer.php controls: option readonly= ".print_r($options->readonly,true);
         $question = $qa->get_question();
         $resourcecache = new qbehaviour_opaque_resource_cache($question->engineid,
                 $question->remoteid, $question->remoteversion);
